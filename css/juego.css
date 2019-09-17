@@ -46,6 +46,7 @@ li::before {
 
 .texto-centrado {
   text-align: center;
+  width: 300px;
 }
 
 #juego div {

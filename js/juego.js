@@ -39,7 +39,7 @@ Existen diferentes formas de hacer este chequeo a partir de la grilla. */
 function chequearSiGano() {
     for(var i = 0; i < grilla.length; i++){
       for(var j = 0; j < grilla.length - 1 ; j++){
-        if(grilla[i][j] != grilla[i][j+1] - 1)
+        if(grilla[i][j+1] != grilla[i][j] + 1)
           return false;
       }
       return true;
@@ -74,6 +74,9 @@ function intercambiarPosicionesGrilla(filaPos1, columnaPos1, filaPos2, columnaPo
 function posicionValida(fila, columna) {
   if(fila <= grilla.length && columna <= grilla.length){
     return true;
+  }
+  else{
+    return false;
   }
 }
 
@@ -265,5 +268,7 @@ function iniciar() {
     capturarTeclas();
 }
 
-// Ejecutamos la función iniciar
-iniciar();
+window.onload = function(){
+  // Ejecutamos la función iniciar
+  iniciar();
+}
