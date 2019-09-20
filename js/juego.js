@@ -1,5 +1,5 @@
 // Arreglo que contiene las intrucciones del juego 
-var instrucciones = ['Presionar','Mover','Soltar'];
+var instrucciones = ['Utilizar Flechas','El movimiento de las piezas es hacia la posición vacía','Llegar al Objetivo'];
 // Arreglo para ir guardando los movimientos que se vayan realizando
 var movimientos = [];
 
@@ -39,14 +39,30 @@ function agregarUltimoMovimiento(direccion){
 /* Esta función va a chequear si el Rompecabezas esta en la posicion ganadora. 
 Existen diferentes formas de hacer este chequeo a partir de la grilla. */
 function chequearSiGano() {
-    for(var i = 0; i < grilla.length; i++){
-      for(var j = 0; j < grilla.length - 1 ; j++){
-        if(grilla[i][j+1] != grilla[i][j] + 1)
-          return false;
+  var anterior = 0;
+  var gano = true;
+
+  for(var i = 0; i < grilla.length; i++){
+    for(var j = 0; j < grilla.length; j++){
+      if(!sonConsecutivos(anterior, grilla[i][j])){
+        gano = false;
       }
-      return true;
+      anterior = grilla[i][j];
     }
+  }
+  return gano;
 }
+
+function sonConsecutivos(anterior, valorDeGrilla){
+  var aux = anterior + 1;
+
+  if(aux == valorDeGrilla){
+    return true;
+  }
+  else
+    return false;
+}
+
 
 // Implementar alguna forma de mostrar un cartel que avise que ganaste el juego
 function mostrarCartelGanador() {
@@ -99,8 +115,8 @@ function moverEnDireccion(direccion) {
   var nuevaFilaPiezaVacia;
   var nuevaColumnaPiezaVacia;
 
-  console.log('Direccion elegida: ' + direccion);
-  console.log('Código Direccion elegido: ');
+  console.log('NUEVO MOVIMIENTO');
+  console.log('Códigos de Direccion: ');
   console.log('codigosDireccion.ABAJO: ' + codigosDireccion.ABAJO);
   console.log('codigosDireccion.ARRIBA: ' + codigosDireccion.ARRIBA);
   console.log('codigosDireccion.DERECHA: ' + codigosDireccion.DERECHA);
@@ -159,7 +175,7 @@ function moverEnDireccion(direccion) {
 function mostrarGrilla(){
   for(var i = 0; i < grilla.length; i++){
     for(var j = 0; j < grilla.length; j++){
-      console.log('grilla['+i+']'+'['+j+']= ' + grilla[i][j]);
+      console.log('grilla['+i+']'+'['+j+'] = ' + grilla[i][j]);
       if(j == 2)
         console.log('\n');
     }
@@ -324,4 +340,3 @@ function iniciar() {
 
 // Ejecutamos la función iniciar
 iniciar();
-
