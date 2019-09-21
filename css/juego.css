@@ -59,16 +59,17 @@ li::before {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
-/**********************************/
+/******************************************************************************************/
 #juego{
-  width: 900px;
-  height: 900px;
+  width: 700px;
+  height: 700px;
 }
 
 .piezas{
   width: 25%;
   border: solid 1px lightblue;
   display: inline-block;
+  /* float: left; */
 }
 
 .piezas img{
@@ -81,4 +82,40 @@ li::before {
 
 #objetivo img{
   width: 100%;
+}
+
+#titulo{
+  background: #4e7377;
+  line-height: 2;
+}
+
+#instrucciones{
+  background: #4ca1c3;
+}
+
+#ultimo-mov{
+  background: #78787898;
+}
+
+#titulo, #instrucciones, #ultimo-mov{
+  text-align: center;
+}
+
+h3{
+  font-family: Helvetica, Arial, sans-serif;
+  /* font-size: 16px; */
+  font-style: italic;
+  /* line-height: 1.6; */
+
+}
+
+#flecha{
+  margin: 2px;
+  border: solid 2px green;
+  position: relative;
+  margin: auto;
+}
+
+#footer{
+  text-align: center;
 }

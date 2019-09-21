@@ -1,5 +1,5 @@
 // Arreglo que contiene las intrucciones del juego 
-var instrucciones = ['Utilizar Flechas','El movimiento de las piezas es hacia la posición vacía','Llegar al Objetivo'];
+var instrucciones = ['Recargar hasta que se vea dirección del último movimiento','Utilizar Flechas para mover las piezas','El movimiento de las piezas es hacia la posición vacía','Mover piezas hasta llegar al Objetivo'];
 // Arreglo para ir guardando los movimientos que se vayan realizando
 var movimientos = [];
 
@@ -31,8 +31,6 @@ y utilice actualizarUltimoMovimiento para mostrarlo en pantalla */
 
 function agregarUltimoMovimiento(direccion){
   movimientos.push(direccion);
-  console.log('Movimientos: ' + movimientos);
-  
   actualizarUltimoMovimiento(direccion);
 }
 
@@ -67,7 +65,7 @@ function sonConsecutivos(anterior, valorDeGrilla){
 // Implementar alguna forma de mostrar un cartel que avise que ganaste el juego
 function mostrarCartelGanador() {
     if(chequearSiGano()){
-      alert('Gano');
+      alert('Ganaste !!');
     }
 }
 
@@ -115,19 +113,6 @@ function moverEnDireccion(direccion) {
   var nuevaFilaPiezaVacia;
   var nuevaColumnaPiezaVacia;
 
-  console.log('NUEVO MOVIMIENTO');
-  console.log('Códigos de Direccion: ');
-  console.log('codigosDireccion.ABAJO: ' + codigosDireccion.ABAJO);
-  console.log('codigosDireccion.ARRIBA: ' + codigosDireccion.ARRIBA);
-  console.log('codigosDireccion.DERECHA: ' + codigosDireccion.DERECHA);
-  console.log('codigosDireccion.IZQUIERDA: ' + codigosDireccion.IZQUIERDA);
-
-  // var codigosDireccion = {
-  //   IZQUIERDA: 37,
-  //   ARRIBA: 38,
-  //   DERECHA: 39,
-  //   ABAJO: 40
-  // }
   // Mueve pieza hacia la abajo, reemplazandola con la blanca
   if (direccion === codigosDireccion.ABAJO) {
     nuevaFilaPiezaVacia = filaVacia - 1;
@@ -151,28 +136,22 @@ function moverEnDireccion(direccion) {
     nuevaColumnaPiezaVacia = columnaVacia + 1;
     nuevaFilaPiezaVacia = filaVacia;
   }
-  console.log('Nueva Fila Pieza Vacia: ' + nuevaFilaPiezaVacia);
-  console.log('Nueva Columna Pieza Vacia: ' + nuevaColumnaPiezaVacia);
+
   /* A continuación se chequea si la nueva posición es válida, si lo es, se intercambia. 
   Para que esta parte del código funcione correctamente deberás haber implementado 
   las funciones posicionValida, intercambiarPosicionesGrilla y actualizarPosicionVacia */
 
     if (posicionValida(nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia)) {
-        console.log('¿Es posicion válida?' + posicionValida(nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia));
         
         intercambiarPosiciones(filaVacia, columnaVacia, nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia);
-        console.log('Despues del intercambio\nNueva Fila Pieza Vacia: ' + nuevaFilaPiezaVacia + '\nNueva Columma Pieza Vacia: ' + nuevaColumnaPiezaVacia);
-
         actualizarPosicionVacia(nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia);
-        console.log('Posicion Vacia actualizada: ' + '\nFila Vacia: ' + filaVacia + '\nColumna Vacia: ' + columnaVacia);
-
         //COMPLETAR: Agregar la dirección del movimiento al arreglo de movimientos
         agregarUltimoMovimiento(direccion);
-        mostrarGrilla();
+        mostrarGrillaPorConsola();
     }
 }
 
-function mostrarGrilla(){
+function mostrarGrillaPorConsola(){
   for(var i = 0; i < grilla.length; i++){
     for(var j = 0; j < grilla.length; j++){
       console.log('grilla['+i+']'+'['+j+'] = ' + grilla[i][j]);
@@ -213,14 +192,8 @@ function intercambiarPosiciones(fila1, columna1, fila2, columna2) {
   // Intercambio posiciones en la grilla
   var pieza1 = grilla[fila1][columna1];
   var pieza2 = grilla[fila2][columna2];
-
-  console.log('pieza1: ' + pieza1);
-  console.log('pieza2: ' + pieza2);
   
-  intercambiarPosicionesGrilla(fila1, columna1, fila2, columna2);
-  console.log('grilla['+fila1+']'+'['+columna1+'] = ' + grilla[fila1][columna1]);
-  console.log('grilla['+fila2+']'+'['+columna2+'] = ' + grilla[fila2][columna2]);
-  
+  intercambiarPosicionesGrilla(fila1, columna1, fila2, columna2);  
   intercambiarPosicionesDOM('pieza' + pieza1, 'pieza' + pieza2);
 
 }
@@ -231,25 +204,13 @@ las fichas en la pantalla */
 function intercambiarPosicionesDOM(idPieza1, idPieza2) {
   // Intercambio posiciones en el DOM
   var elementoPieza1 = document.getElementById(idPieza1);
-  console.log('elementoPieza1: ' + elementoPieza1);
-
   var elementoPieza2 = document.getElementById(idPieza2);
-  console.log('elementoPieza2: ' + elementoPieza2);
-
   var padre = elementoPieza1.parentNode;
-  console.log('Padre de elemento pieza 1: ' + padre);
-
   var clonElemento1 = elementoPieza1.cloneNode(true);
-  console.log('Clon de elemento pieza 1: ' + clonElemento1);
-
   var clonElemento2 = elementoPieza2.cloneNode(true);
-  console.log('Clon de elemento pieza 2: ' + clonElemento2);
 
   padre.replaceChild(clonElemento1, elementoPieza2);
-  console.log('clon elemento 1: ' + padre.firstElementChild);
-  
   padre.replaceChild(clonElemento2, elementoPieza1);
-  console.log('clon elemento 2: ' + padre.firstElementChild);
 }
 
 /* Actualiza la representación visual del último movimiento 
@@ -270,7 +231,6 @@ function actualizarUltimoMovimiento(direccion) {
       ultimoMov.textContent = '←';
       break;
   }
-  console.log('Ultimo Movimiento: ' + ultimoMov);
 }
 
 /* Esta función permite agregar una instrucción a la lista
