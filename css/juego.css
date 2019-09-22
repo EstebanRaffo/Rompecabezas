@@ -85,20 +85,16 @@ li::before {
 }
 
 #titulo{
-  background: #4e7377;
+  background: #4e7377a6;
   line-height: 2;
 }
 
 #instrucciones{
-  background: #4ca1c3;
+  background: #4ca1c3a8;
 }
 
 #ultimo-mov{
   background: #78787898;
-}
-
-#titulo, #instrucciones, #ultimo-mov{
-  text-align: center;
 }
 
 h3{
@@ -106,7 +102,6 @@ h3{
   /* font-size: 16px; */
   font-style: italic;
   /* line-height: 1.6; */
-
 }
 
 #flecha{
@@ -119,3 +114,17 @@ h3{
 #footer{
   text-align: center;
 }
+
+#movimientos-ganadores{
+  display: none;
+}
+
+#lista-mov-ganadores{
+  display: inline-block;
+  width: 80%;
+  border: solid green 1px;
+  font-size: 40px;
+}
+
+
+  

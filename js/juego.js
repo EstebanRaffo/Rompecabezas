@@ -1,5 +1,9 @@
 // Arreglo que contiene las intrucciones del juego 
-var instrucciones = ['Recargar hasta que se vea dirección del último movimiento','Utilizar Flechas para mover las piezas','El movimiento de las piezas es hacia la posición vacía','Mover piezas hasta llegar al Objetivo'];
+var instrucciones = ['Recargar hasta que se vea dirección del último movimiento y las piezas estén mezcladas',
+                      'Utilizar Flechas para mover las piezas',
+                      'El movimiento de las piezas es hacia la posición vacía',
+                      'Mover piezas hasta llegar al Objetivo'];
+
 // Arreglo para ir guardando los movimientos que se vayan realizando
 var movimientos = [];
 
@@ -67,6 +71,36 @@ function mostrarCartelGanador() {
     if(chequearSiGano()){
       alert('Ganaste !!');
     }
+    
+    var movimientosGanadores = document.getElementById('movimientos-ganadores');
+    movimientosGanadores.style.display = 'block';
+    var verGanadores = document.getElementById('ver-ganadores');
+    verGanadores.onclick = () => mostrarMovimientosGanadores(); 
+}
+
+function mostrarMovimientosGanadores(){
+
+  var listaMov = document.getElementById('lista-mov-ganadores');
+
+  for(let i = 0; i < movimientos.length; i++){
+    let direccion = movimientos[i];
+
+    switch (direccion) {
+      case codigosDireccion.ARRIBA:
+        listaMov.textContent += ' ↑ ';
+        break;
+      case codigosDireccion.ABAJO:
+        listaMov.textContent += ' ↓ ';
+        break;
+      case codigosDireccion.DERECHA:
+        listaMov.textContent += ' → ';
+        break;
+      case codigosDireccion.IZQUIERDA:
+        listaMov.textContent += ' ← ';
+        break;
+    }  
+  }
+  resetearMovimientos();
 }
 
 /* Función que intercambia dos posiciones en la grilla.
@@ -148,6 +182,9 @@ function moverEnDireccion(direccion) {
         //COMPLETAR: Agregar la dirección del movimiento al arreglo de movimientos
         agregarUltimoMovimiento(direccion);
         mostrarGrillaPorConsola();
+    }
+    else{
+      return;
     }
 }
 
@@ -295,8 +332,15 @@ presiona el usuario */
 function iniciar() {
     mostrarInstrucciones(instrucciones);
     mezclarPiezas(30);
+    // Para los movimientos ganadores no se tienen en cuenta los movimientos efectuados en la mezcla de piezas
+    resetearMovimientos();
     capturarTeclas();
+}
+
+function resetearMovimientos(){
+  movimientos = [];  
 }
 
 // Ejecutamos la función iniciar
 iniciar();
+
