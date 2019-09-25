@@ -67,7 +67,7 @@ li::before {
 
 .piezas{
   width: 25%;
-  border: solid 1px lightblue;
+  /* border: solid 1px lightblue; */
   display: inline-block;
   /* float: left; */
 }

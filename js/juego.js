@@ -68,9 +68,7 @@ function sonConsecutivos(anterior, valorDeGrilla){
 
 // Implementar alguna forma de mostrar un cartel que avise que ganaste el juego
 function mostrarCartelGanador() {
-    if(chequearSiGano()){
-      alert('Ganaste !!');
-    }
+    alert('Ganaste !!');
     
     var movimientosGanadores = document.getElementById('movimientos-ganadores');
     movimientosGanadores.style.display = 'block';
@@ -123,7 +121,7 @@ function intercambiarPosicionesGrilla(filaPos1, columnaPos1, filaPos2, columnaPo
 
 // Para chequear si la posición está dentro de la grilla.
 function posicionValida(fila, columna) {
-  if(fila <= grilla.length && columna <= grilla.length){
+  if(fila < grilla.length && columna < grilla.length){
     return true;
   }
   else{
@@ -298,6 +296,7 @@ function mezclarPiezas(veces) {
 
   setTimeout(function() {
       mezclarPiezas(veces - 1);
+      resetearMovimientos();
     }, 100);
 }
 
@@ -331,16 +330,16 @@ y ejecutando la función para que se capturen las teclas que
 presiona el usuario */
 function iniciar() {
     mostrarInstrucciones(instrucciones);
-    mezclarPiezas(30);
+    mezclarPiezas(10);
     // Para los movimientos ganadores no se tienen en cuenta los movimientos efectuados en la mezcla de piezas
-    resetearMovimientos();
+    // resetearMovimientos();
     capturarTeclas();
 }
 
 function resetearMovimientos(){
+  // debugger
   movimientos = [];  
 }
 
 // Ejecutamos la función iniciar
 iniciar();
-
