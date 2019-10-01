@@ -121,12 +121,7 @@ function intercambiarPosicionesGrilla(filaPos1, columnaPos1, filaPos2, columnaPo
 
 // Para chequear si la posición está dentro de la grilla.
 function posicionValida(fila, columna) {
-  if(fila < grilla.length && columna < grilla.length){
-    return true;
-  }
-  else{
-    return false;
-  }
+    return (fila < grilla.length && columna < grilla.length);
 }
 
 
