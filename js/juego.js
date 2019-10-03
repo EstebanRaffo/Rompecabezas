@@ -57,12 +57,7 @@ function chequearSiGano() {
 
 function sonConsecutivos(anterior, valorDeGrilla){
   var aux = anterior + 1;
-
-  if(aux == valorDeGrilla){
-    return true;
-  }
-  else
-    return false;
+  return aux == valorDeGrilla;
 }
 
 
